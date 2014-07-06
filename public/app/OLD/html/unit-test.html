@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JavaScript Unit Tests</title>
+<style type="text/css">
+<!--
+.fnt-normal {
+	font-family: Helvetica, sans-serif, Arial;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333;	
+}
+.fnt-error {
+	color: #FF00CC;
+}
+-->
+</style>
+<script language="JavaScript" type="text/javascript" src="../res/basics.R1.js"></script>
+<script>
+function onOptionSelect(option) {
+﻿  DOM.id("option-is-selected").innerHTML = Option.isSelected(option);
+﻿  DOM.id("option-selected-index").innerHTML = Option.selectedIndex(option);
+﻿  DOM.id("option-selected-value").innerHTML = option.value;
+}
+function onRadioSelect(radio) {
+﻿  DOM.id("radio-is-selected").innerHTML = Radio.isSelected(document.form1.radiobutton1);
+﻿  DOM.id("radio-selected-index").innerHTML = Radio.selectedIndex(document.form1.radiobutton1);
+﻿  DOM.id("radio-selected-value").innerHTML = Radio.selectedValue(document.form1.radiobutton1);
+}
+function onStandaloneSelect() {
+﻿  DOM.id("radio-standalone").innerHTML = "clicked";
+}
+
+function loadDocument() {
+﻿  // noop;
+}
+</script>
+</head>
+
+<body class="fnt-normal" onload="loadDocument()">
+<script>
+UT.printTitle("Strings");
+var str1 = "aString";
+var str2 = new String;
+UT.assert("Strings.isString('')", "true");
+UT.assert("Strings.isString(Strings)", "false");
+UT.assert("Strings.isString(str1)", "true");
+UT.assert("Strings.isString(str2)", "true");
+UT.assert("Strings.isString(window)", "false");
+UT.assert("Strings.isEmpty('')", "true");
+UT.assert("Strings.isEmpty('\\n \\t ')", "false");
+UT.assert("Strings.isEmpty('a')", "false");
+UT.assert("Strings.isEmpty(null)", "true");
+UT.assert("Strings.isEmpty(undefined)", "true");
+UT.assert("Strings.removeLeading('\\nbaa', '\\n')", "baa", true);
+UT.assert("Strings.removeLeading('aaa', 'a')", "", true);
+UT.assert("Strings.removeLeading('bbb', 'a')", "bbb", true);
+UT.assert("Strings.removeLeading('abc', 'ab')", "c", true);
+UT.assert("Strings.removeLeading('abbc', 'ab')", "bc", true);
+UT.assert("Strings.removeTrailing('baa_ff', 'f')", "baa_", true);
+UT.assert("Strings.removeTrailing('aaa', 'a')", "", true);
+UT.assert("Strings.removeTrailing('abc', 'bc')", "a", true);
+UT.assert("Strings.removeTrailing('abbc', 'bc')", "ab", true);
+UT.assert("Strings.removeTrailing('2px', 'px')", "2", true);
+UT.assert("Strings.remove('ff_aa_ff', 'ff')", "_aa_", true);
+UT.assert("Strings.replace('ABCABC', 'C', 'A')", "ABAABA", true);
+UT.assert("Strings.replace('ABCABC', 'ABC', 'mnbsd')", "mnbsdmnbsd", true);
+UT.assert("Strings.trim(' \\n\\b \\tABC \\t\\n ')", "ABC", true);
+UT.assert("Strings.trim(' \\n\\b \\t\\t\\n ')", "", true);
+UT.assert("Strings.toInteger('0')", "0");
+UT.assert("Strings.toInteger('008')", "8");
+UT.assert("Strings.valueOf(8, 5)", "00008"); 
+UT.assert("Strings.valueOf(10)", "10");
+UT.assert("Strings.valueOf(8.0, 5, 2)", "00008.00"); 
+UT.assert("Strings.valueOf(8, 5, 2)", "00008.00"); 
+UT.assert("Strings.valueOf(8.55, 2, 3)", "08.550");
+UT.assert("Strings.valueOf(8.55, 5, 1)", "00008.6");
+UT.assert("Strings.valueOf(122.7)", "122.7");
+UT.assert("Strings.valueOf(122.7, 5)", "00122.7");
+UT.assert("Strings.valueOf(122.7, 2, 7)", "122.7000000");
+UT.assert("Strings.countWords('Carlos')", "1");
+UT.assert("Strings.countWords('Carlos da Silva Pereira')", "4");
+UT.assert("Strings.countWords('  abc    a')", "2");
+UT.assert("Strings.startsWith('SomewhereNice', 'Somewhere')", "true");
+UT.assert("Strings.startsWith('SomewhereNice', 'Somewher')", "true");
+UT.assert("Strings.startsWith('SomewhereNice', 'Somewhera')", "false");
+UT.assert("Strings.startsWith('SomewhereNice', 'Nice')", "false");
+UT.assert("Strings.startsWith('Somewhere', 'SomewhereNice')", "false");
+UT.assert("Strings.endsWith('SomewhereNice', 'eNice')", "true");
+UT.assert("Strings.endsWith('SomewhereNice', 'Somewhere')", "false");
+UT.assert("Strings.endsWith('SomewhereNice', 'aNice')", "false");
+
+UT.printTitle("Dates");
+UT.assert("Dates.getYear(new Date())", new Date().getFullYear());
+UT.assert("Dates.isLeap(2004)", "true");
+UT.assert("Dates.isLeap(2008)", "true");
+UT.assert("Dates.isLeap(2009)", "false");
+UT.eval("Dates.toString(new Date())");
+UT.assert("Dates.valueOf('2004 jul 4')", "Sun Jul 4 00:00:00 CST 2004");
+UT.assert("Dates.valueOf('2004/3/4')", "Thu Mar 4 00:00:00 CST 2004");
+UT.assert("Dates.valueOf('2004-03-4')", "Thu Mar 4 00:00:00 CST 2004");
+UT.assert("Dates.valueOf('2004-03-32')", "false");
+UT.assert("Dates.valueOf('2004-2-29')", "Sun Feb 29 00:00:00 CST 2004");
+UT.assert("Dates.valueOf('2005-2-29')", "false");
+UT.assert("Dates.equals(new Date(), new Date())", "true");
+UT.assert("Dates.equals(Dates.valueOf('2004 jul 4'), new Date())", "false");
+UT.eval("Dates.formatTime()");
+UT.assert("Dates.formatTime(Dates.valueOf('2004 jul 4'))", "00:00");
+
+UT.printTitle("Char");
+UT.assert("Char.isLetter('c')", "true");
+UT.assert("Char.isLetter('ç')", "true");
+UT.assert("Char.isLetter('Â')", "true");
+UT.assert("Char.isLetter('ñ')", "true");
+UT.assert("Char.isLetter(':')", "false");
+UT.assert("Char.isLetter('8')", "false");
+UT.assert("Char.isLetter('_')", "false");
+UT.assert("Char.isLetter('$')", "false");
+UT.assert("Char.isDigit('c')", "false");
+UT.assert("Char.isDigit('9')", "true");
+UT.assert("Char.isDigit('/')", "false");
+UT.assert("Char.isAlphaNumeric('c')", "true");
+UT.assert("Char.isAlphaNumeric('á')", "true");
+UT.assert("Char.isAlphaNumeric('9')", "true");
+UT.assert("Char.isAlphaNumeric('#')", "false");
+
+UT.printTitle("Arrays");
+UT.assert("Arrays.flatten({array: ['a','b','c'], separator: ','})", "a,b,c");
+UT.assert("Arrays.flatten({array: ['a','b','c'], separator: '|'})", "a|b|c");
+UT.assert("Arrays.last(['a','b','c'])", "c");
+
+UT.printTitle("Validator");
+UT.assert("Validator.isEmpty('')", "true");
+UT.assert("Validator.isEmpty(false)", "true");
+UT.assert("Validator.isEmpty('\\n \\n\\t')", "true");
+UT.assert("Validator.isNumber(10)", "true");
+UT.assert("Validator.isNumber(344.77)", "true");
+UT.assert("Validator.isNumber('ww')", "false");
+UT.assert("Validator.isInteger('12')", "true");
+UT.assert("Validator.isInteger('12.5')", "false");
+UT.assert("Validator.isEmail('khepera@portugalmail.pt')", "true");
+UT.assert("Validator.isEmail('y@po.ru')", "true");
+UT.assert("Validator.isEmail('y@po.r')", "false");
+UT.assert("Validator.isEmail('y@poru')", "false");
+UT.assert("Validator.isEmail('@po.ru')", "false");
+UT.assert("Validator.isEmail('y@po@ru.u')", "false");
+UT.assert("Validator.isTime('1:33')", "true");
+UT.assert("Validator.isTime('90:33')", "false");
+UT.assert("Validator.isTime('00:06')", "true");
+UT.assert("Validator.isTime('00:60')", "false");
+UT.assert("Validator.isTime('00:59:59')", "true");
+UT.assert("Validator.isTime('24:59:59')", "false");
+UT.assert("Validator.isTime('00:59:60')", "false");
+UT.assert("Validator.isDate('2004 jan 45')", "false");
+UT.assert("Validator.isDate('30 dez 1910')", "true");
+UT.assert("Validator.isDate('30/8/2000')", "true");
+UT.assert("Validator.isDate('29/2/2003')", "false");
+UT.assert("Validator.isDate('2004-FEV-29')", "true");
+UT.assert("Validator.isAlphabetic('8')", "false");
+UT.assert("Validator.isAlphabetic('Carlos')", "true");
+UT.assert("Validator.isAlphabetic('Carlos8')", "false");
+UT.assert("Validator.isAlphabetic('Gonçalves')", "true");
+
+UT.printTitle("Radio buttons:");
+</script>
+<form name="form1">
+<table border="1" cellspacing="0" cellpadding="3">
+  <tr class="fnt-text">
+    <td width="22" align="left">
+﻿    <input name="radiobutton1" type="radio" value="V1" onclick="onRadioSelect()"></td>
+    <td width="80">Value 1 </td>
+    <td width="100">isSelected</td>
+    <td width="60" class="fnt-text" id="radio-is-selected">N/A</td>
+  </tr>
+  <tr class="fnt-text">
+    <td align="left">
+﻿    <input name="radiobutton1" type="radio" value="V2" onclick="onRadioSelect()"></td>
+    <td>Value 2 </td>
+    <td>selectedIndex</td>
+    <td class="fnt-text" id="radio-selected-index">N/A</td>
+  </tr>
+  <tr class="fnt-text">
+    <td align="left">
+﻿    <input name="radiobutton1" type="radio" value="V3" onclick="onRadioSelect()"></td>
+    <td>Value 3 </td>
+    <td>selectedValue</td>
+    <td class="fnt-text" id="radio-selected-value">N/A</td>
+  </tr>
+  <tr class="fnt-text">
+    <td align="left">
+﻿    <input name="radiobutton2" type="radio" value="V4" onclick="onStandaloneSelect()"></td>
+    <td>Standalone </td>
+    <td>click me</td>
+    <td class="fnt-text" id="radio-standalone">N/A</td>
+  </tr>
+</table>
+<script>
+UT.nl();
+UT.assert("Radio.isRadioArray(document.form1.radiobutton1)", "true");
+UT.assert("Radio.isRadioArray(document.form1.radiobutton2)", "false");
+UT.assert("Radio.isRadioButton(document.form1.radiobutton2)", "true");
+UT.assert("Radio.isRadioButton(document.form1.radiobutton1[0])", "true");
+UT.nl();
+
+UT.printTitle("Option list:");
+UT.nl();
+</script>
+<table border="1" cellspacing="0" cellpadding="3">
+  <tr class="fnt-text">
+    <td width="110">
+﻿  <select name="oList" onchange="onOptionSelect(this)">
+      <option value="0">choose...</option>
+      <option value="V1">Value 1</option>
+      <option value="V2">Value 2</option>
+      <option value="V3">Value 3</option>
+    </select></td>
+    <td width="100" class="fnt-text">isSelected</td>
+    <td width="60" class="fnt-text" id="option-is-selected">N/A</td>
+  </tr>
+  <tr class="fnt-text">
+    <td>&nbsp;</td>
+    <td>selectedIndex</td>
+    <td class="fnt-text" id="option-selected-index">N/A</td>
+  </tr>
+  <tr class="fnt-text">
+    <td>&nbsp;</td>
+    <td>selectedValue</td>
+    <td class="fnt-text" id="option-selected-value">N/A</td>
+  </tr>
+</table>
+</form>
+<script>
+UT.assert("Option.isOption(document.form1.oList)", "true");
+UT.nl();
+
+UT.printTitle("System:");
+UT.eval("navigator.appVersion");
+UT.eval("System.base.name");
+UT.eval("System.base.version");
+UT.eval("System.base.majorVersion");
+UT.eval("System.base.minorVersion");
+UT.eval("System.browser.ie");
+UT.eval("System.browser.safari");
+UT.eval("System.browser.chrome");
+UT.eval("System.browser.ns");
+UT.eval("System.browser.name");
+UT.eval("System.browser.version");
+UT.eval("System.browser.majorVersion");
+UT.eval("System.browser.minorVersion");
+UT.eval("System.browser.language");
+UT.eval("System.browser.cookiesEnabled()");
+UT.eval("System.browser.javaOn()");
+UT.eval("System.os.windows");
+UT.eval("System.os.mac");
+UT.eval("System.os.name");
+UT.eval("System.os.version");
+UT.eval("System.device.pc");
+UT.eval("System.device.iPhone");
+UT.eval("System.device.iPad");
+
+UT.printTitle("DOM:");
+UT.assert("DOM.generateId()", "node_1");
+UT.assert("DOM.generateId()", "node_2");
+UT.nl();
+</script>
+<a href="javascript:DOM.getWindow('win1', 'files/about.html').open();">Open a regular window</a><br>
+<a href="javascript:DOM.getPopup('win2', 'files/about.html').setSize(300, 200).open();">Open a popup window</a><br>
+<a href="javascript:DOM.getPopup('win3', 'files/about.html').setBounds(20, 20, 300, 200).setScrollbars(true).open();">Open a popup window with a scrolling bar</a><br>
+
+<script>
+UT.printTitle("Utils:");
+UT.eval("Utils.log('logging a message')", "logging a message");
+UT.assertFail("Utils.checkArgs(null)", "args is null");
+UT.assertFail("Utils.checkArgs({text:'aaa', wordWrap:false}, 'text', 'wordWrap', 'missingArg')", "'missingArg': required argument");
+UT.assertFail("Utils.checkArgs({text:'aaa', wordWrap:false}, 'missingArg=\"default value=s\"')", "illegal format: missingArg=\"default value=s\"");
+var args = Utils.checkArgs({text:'aaa', wordWrap:false}, 'text', 'wordWrap', 'missingArg=\"default value\"');
+UT.assert("args.missingArg", "default value");
+
+
+</script>
+<br>
+<br>
+<br>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+<% content_for :title, "Issue details" %>
+<% content_for :subtitle, @issue.title %>
+
+
+
+<p id="notice"><%= notice %></p>
+
+<table class="pure-table pure-table-striped">
+	<tr>
+		<td>Title</td>
+		<td><%= @issue.title %>
+	  </td>
+	</tr>
+	
+	<tr>
+		<td>Description</td>
+		<td><%= @issue.description %>
+	  </td>
+	</tr>
+</table>
+
+
+
+
+<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<%= link_to 'Back', issues_path %>

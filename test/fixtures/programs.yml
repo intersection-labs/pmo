@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: Program1
+  description: MyText
+
+two:
+  name: Program 2
+  description: MyText

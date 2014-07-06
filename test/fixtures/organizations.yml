@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+Accenture:
+  name: Accenture
+  description: Accenture plc is a multinational management consulting, technology services and outsourcing company. Incorporated headquarters are in Dublin, Republic of Ireland while operations headquarters are in Chicago, Illinois.
+
+Deloitte:
+  name: Deloitte
+  description: Deloitte Touche Tohmatsu Limited, commonly referred to as Deloitte, is one of the Big Four professional services firms along with PricewaterhouseCoopers, Ernst & Young, and KPMG.

@@ -1,0 +1,527 @@
+
+div.wg-title {
+	font-size: 20px;
+	font-weight: bold;
+	color: #333333;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+div.wg-subtitle {
+	font-size: 16px;
+	font-weight: bold;
+	color: #333333;
+	margin-top: 6px;
+	margin-bottom: 4px;
+}
+div.wg-label {
+	color: #333333;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+div.wg-text {
+	margin-bottom: 8px;
+}
+div.wg-block {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	color: #999999;
+	text-align: center;
+	vertical-align: middle;
+	padding: 15px;
+	margin-bottom: 10px;
+}
+div.wg-block:hover {
+	background-color: #F8F8F8;
+	color: #666666;
+	font-weight: bold;
+	cursor: pointer;
+}
+div.wg-block-s {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	padding: 15px;
+	margin-bottom: 10px;
+	background-color: #F8F8F8;
+	color: #666666;
+}
+table.wg-button-grid {
+	width: 100%;
+	border: 1px solid #CCCCCC;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+td.wg-button-grid {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	padding: 10px;
+	color: #999999;
+	border: 1px solid #CCCCCC;
+}
+td.wg-button-grid:hover {
+	font-weight: bold;
+	cursor: pointer;
+	color: #666666;
+	background-color: #F8F8F8;
+}
+td.wg-button-grid-s {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	padding: 10px;
+	color: #666666;
+	background-color: #F8F8F8;
+	border: 1px solid #CCCCCC;
+}
+div.wg-user-label {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin-right: 7px;
+	margin-bottom: 7px;
+	float: left;
+	color: #333333;
+	font-weight: bold;
+}
+div.wg-user-company {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 7px;
+	padding-right: 7px;
+	margin-right: 5px;
+	margin-bottom: 7px;
+	float: left;
+	color: #30A2FB;
+	font-weight: normal;
+	background-color: #DCF1FF;
+}
+div.wg-user-external {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 7px;
+	padding-right: 7px;
+	margin-right: 5px;
+	margin-bottom: 7px;
+	float: left;
+	color: #FA0000;
+	font-weight: normal;
+	background-color: #FFEAF0;
+}
+div.wg-user-group {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 7px;
+	padding-right: 7px;
+	margin-right: 5px;
+	margin-bottom: 7px;
+	float: left;
+	color: #669500;
+	font-weight: normal;
+	background-color: #E9FABC;
+}
+input[type="text"].wg-textbox {
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-size: 12px;
+	color: #333333;
+	border: 1px solid #CCCCCC;
+	padding: 5px;
+	margin: 0px;
+}
+textarea.wg-textarea {
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-size: 12px;
+	color: #333333;
+	border: 1px solid #CCCCCC;
+	padding: 5px;
+	margin: 0px;
+}
+div.wg-datepicker-box {
+	border: 1px solid #CCCCCC;
+	padding: 0px;
+	margin: 0px;
+	text-align: left;
+	display: inline-block;
+}
+input.wg-datepicker-input {
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-size: 12px;
+	color: #333333;
+	border: none;
+	padding: 5px;
+	margin: 0px;
+	width: 118px;
+}
+td.wg-datepicker-icon-cell {
+	width: 24px;
+	vertical-align: middle;
+	text-align: center;
+}
+input.wg-datepicker-icon {
+	background: url(<%= 'icon-calendar.png' %>);
+	background-repeat: no-repeat;
+	border: none;
+	width: 16px;
+	height: 16px;
+}
+
+
+
+/* OLD */
+table.wg-menu {
+	position: absolute;
+	z-index: 6;
+	display: none;
+	background-image:url('../img/bg-msg.png');
+	cursor: pointer;
+	border: 1px solid black;
+}
+tr.wg-menu-column:hover {
+	background-color: #000000;
+}
+tr.wg-sub-menu-column {
+	background-color: #000000;
+}
+td.wg-menu-link {
+	padding: 5px;
+	padding-right: 7px;
+	color: #FFFFFF;
+	text-align: left;
+}
+td.wg-menu-img {
+	padding: 5px;
+	text-align: right;
+}
+input.wg-button-menu-left {
+	background: #010A1F url('../img/buttons-normal.png') no-repeat;
+	background-position: -5px -5px;
+	height: 26px;
+	width: 70px;
+	color: white;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border-right: none;
+	border-left: 1px solid #010A1F;
+	border-top: 1px solid #010A1F;
+	border-bottom: 1px solid #010A1F;
+}
+input.wg-button-menu-left:hover {
+	background-position: -5px -35px;
+	cursor: pointer;
+}
+input.wg-button-menu-right {
+	background: #010A1F url('../img/wg-button-menu-right.png') no-repeat;
+	background-position: -5px -5px;
+	height: 26px;
+	width: 26px;
+	border-right: 1px solid #010A1F;
+	border-left: none;
+	border-top: 1px solid #010A1F;
+	border-bottom: 1px solid #010A1F;
+}
+input.wg-button-menu-right:hover {
+	background-position: -5px -35px;
+	cursor: pointer;
+}
+div.wg-dialog-bg {
+	z-index: 100;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color:#000000;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	display: none;
+}
+div.wg-dialog-container {
+	position: absolute;
+	z-index: 101;
+	display: none;
+	background-image: url('../img/bg-dialog.png');
+	background-repeat: no-repeat;
+	border: 2px solid #FFFFFF;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+div.wg-dialog-title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	color: #FFFFFF;
+	padding: 0px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+}
+div.wg-dialog-contents {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: center;
+	color: #FFFFFF;
+	padding: 0px;
+	padding-bottom: 20px;
+}
+div.wg-dialog-buttons {
+	text-align: center;
+	padding: 0px;
+	padding-bottom: 20px;
+}
+.wg-sl-pane-holder {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #999999;
+	border-top: none;
+	border-right:none;
+	background-color: #AAAAAA;
+}
+.wg-sl-pane-content {
+	height: 200px;
+	margin: 0px;
+	padding: 0px;
+	width: 350px;
+	overflow: auto;
+}
+.wg-sl-pane-filler {
+	height: 100%;
+	background-color:#FFFFFF;
+}
+td.wg-sl-title-cell {
+	text-align: left;
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 5px;
+	padding-left: 10px;
+}
+td.wg-sl-title-b-right {
+	border-right: 1px solid #FFFFFF;
+}
+td.wg-sl-cell {
+	text-align: left;
+	padding: 5px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+td.wg-sl-cell-b-right {
+	border-right: 1px solid #999999;
+}
+td.wg-sl-cell-b-bottom {
+	border-bottom: 1px solid #999999;
+}
+
+
+/* Full screen classes */
+td.fs-top-bar {
+	background-color: #333333;
+	padding: 0px;
+	height: 25px;
+}
+td.fs-bottom-bar {
+	background-color: #333333;
+	padding: 0px;
+	height: 20px;
+}
+td.fs-top-bar-cell {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	color: #FFFFFF;	
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+div.fs-title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #333333;
+	margin-bottom: 20px;
+}
+div.fs-section-main {
+	margin: 0px;
+	margin-top: 10px;
+	padding: 15px;
+	width: 930px;
+	background-color: white;
+	text-align: left;
+}
+div.fs-title-error {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #CC0000;
+	margin-bottom: 20px;
+}
+div.fs-section-error {
+	margin-top: 10px;
+	margin-left: 0px;
+	margin-right: 10px;
+	padding: 15px;
+	background-color: white;
+	text-align: left;
+}
+
+
+/* Form classes */
+div.frm-section-title {
+	/* container: */
+	padding: 0px;
+	border: none;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	width: 760px;
+	/* font: */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #333333;
+}
+div.frm-section-main {
+	width: 750px;
+	background-color: #FFFFFF;
+	padding: 10px;
+	border: none;
+	margin: 0px;
+	margin-bottom: 10px;
+	vertical-align: top;
+	text-align: left;
+}
+div.frm-bottom {
+	margin: 0px;
+	height: 50px;
+}
+div.separator {
+	height: 10px;
+	padding: 0px;
+	border: none;
+	margin: 0px;
+	display: inline;
+}
+.grid-subtitle {
+	/* container */
+	text-align: left;
+	vertical-align: top;
+	padding: 0px;
+	padding-bottom: 10px;
+	/* font */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #333333;
+}
+td.grid-label {
+	text-align: left;
+	vertical-align: top;
+	padding: 0px;
+	padding-top: 2px;
+	padding-bottom: 10px;
+}
+td.grid-field {
+	text-align: left;
+	vertical-align: top;
+	padding: 0px;
+	padding-bottom: 10px;
+}
+.grid-button {
+	height: 36px;
+	text-align: right;
+	vertical-align: bottom;
+	padding: 0px;
+	padding-bottom: 10px;
+}
+.grid-button-left {
+	height: 36px;
+	text-align: left;
+	vertical-align: bottom;
+	padding: 0px;
+	padding-bottom: 10px;
+}
+td.grid-text {
+	text-align: left;
+	vertical-align: top;
+	padding-left: 0px;
+	padding-right: 10px;
+	padding-top: 2px;
+	padding-bottom: 20px;
+}
+
+/* Specific RIT styles */
+.frm-section-msg {
+	width: 750px;
+	margin: 0px;
+	margin-bottom: 1px;
+	padding-top: 6px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #FFFFFF;
+	border: none;
+	vertical-align: top;
+	text-align: left;
+}
+.msg-container {
+	margin-bottom: 1px;
+}
+.msg-info {
+	background-color: #F4F4F4;
+	margin: 0px;
+	padding-top: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	border: none;
+	vertical-align: top;
+	text-align: left;
+}
+.msg-text {
+	background-color: #FFFFFF;
+	margin: 0px;
+	padding-top: 6px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: none;
+	vertical-align: top;
+	text-align: left;
+}
+td.grid-msg-info {
+	text-align: left;
+	vertical-align: top;
+	padding: 0px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+td.grid-msg-first{
+	vertical-align: bottom;
+	min-height: 60px;
+}
+td.grid-msg-text {
+	text-align: left;
+	vertical-align: top;
+	padding: 0px;
+	padding-top: 8px;
+	padding-bottom: 5px;
+}

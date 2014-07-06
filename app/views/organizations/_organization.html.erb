@@ -1,0 +1,70 @@
+<style type="text/css">
+<!--
+ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;}
+
+.fa-stack {
+	cursor: pointer;
+}
+-->
+</style>
+<% if organization_counter % 4 == 0 %>
+<div class="row">
+<% end %>
+<div class="col-md-3" id="organization<%= organization.id %>">
+	<div id="" class="box <%= [:green, :amber, :red].sample %>">
+		<div id="orgTitle<%= organization.id %>">
+			<h3>
+				<%= organization.name %>
+			</h3>
+			<a href="<%= organization.domain %>">
+				<%= organization.domain %>
+			</a>     
+			<div id="org<%= organization.id %>">
+				<ul>
+				<li><i class="fa fa-lg fa-users"></i>100 users</li>
+				
+				<br />
+				<span class="fa-stack fa-lg" id="edit-organization-<%= organization.id %>">
+				  <i class="fa fa-square-o fa-stack-2x"></i>
+				  <i class="fa fa-edit fa-stack-1x"></i>
+				</span>
+				
+				<a href="/organizations/<%= organization.id %>/programs">
+				<span class="fa-stack fa-lg">
+				  <i class="fa fa-square-o fa-stack-2x"></i>
+				  <i class="fa fa-list-ul fa-stack-1x"></i>
+				</span>
+				</a>
+				
+				<span class="fa-stack fa-lg">
+				  <i class="fa fa-square-o fa-stack-2x"></i>
+				  <i class="fa fa-eye fa-stack-1x"></i>
+				</span>
+				
+				<a data-confirm="Are you sure?" data-method="delete" href="/organizations/<%= organization.id %>" rel="nofollow">
+				<span class="fa-stack fa-lg">
+				  <i class="fa fa-square-o fa-stack-2x"></i>
+				  <i class="fa fa-trash-o fa-stack-1x"></i>
+				</span>
+				</a>
+			
+				
+			</div>
+		</div>
+	</div>
+</div>
+<% if organization_counter % 4 == 3 %>
+</div>
+<% end %>
+
+<script type="text/javascript">
+	$( "#edit-organization-<%= organization.id %>" )
+    .click(function() {
+		$("#dialog-form").load('<%= organization.id %>/edit');
+
+      $( "#dialog-form" ).dialog( "open" );
+    });
+</script>

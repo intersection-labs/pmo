@@ -1,0 +1,3 @@
+$("#organization<%= @organization.id %>").replaceWith("<%= escape_javascript(render @organization) %>")
+$( "#dialog-form" ).dialog( "close" );
+$("#organization<%= @organization.id %>").css({'background-color': 'yellow'}).animate({'background-color':'white'}, 2000);

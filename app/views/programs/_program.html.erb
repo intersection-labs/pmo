@@ -1,0 +1,10 @@
+<div class="pure-u-1-4" id="program<%= program.id %>">
+<div id="" class="box <%= [:green, :amber, :red].sample %>">
+    <%= program.name %>
+    <%= program.description %>
+    <%= link_to 'Show', program %>
+    <%= link_to 'Edit', edit_program_path(program) %>
+    <%= link_to 'Destroy', program, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+</div>
+ 

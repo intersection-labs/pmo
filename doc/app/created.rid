@@ -1,0 +1,7 @@
+Tue, 01 Oct 2013 22:21:38 +0100
+README.rdoc	Tue, 01 Oct 2013 22:21:34 +0100
+app/controllers/application_controller.rb	Sun, 29 Sep 2013 17:19:38 +0100
+app/controllers/programs_controller.rb	Mon, 30 Sep 2013 21:17:24 +0100
+app/helpers/application_helper.rb	Sun, 29 Sep 2013 17:19:38 +0100
+app/helpers/programs_helper.rb	Mon, 30 Sep 2013 21:17:24 +0100
+app/models/program.rb	Mon, 30 Sep 2013 21:17:23 +0100

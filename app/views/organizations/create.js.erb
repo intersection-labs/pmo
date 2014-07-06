@@ -1,0 +1,19 @@
+<% if !@organization.errors.any? %> 
+
+$("<%= escape_javascript(render @organization) %>").appendTo("#organization_list");
+$( "#dialog-form" ).dialog( "close" );
+$("#organization<%= @organization.id %>").css({'background-color': 'yellow'}).animate({'background-color':'white'}, 2000);
+
+<% else %>
+$("<h3>Please correct the following errors</h3>").appendTo("#error_explanation");
+
+$("<ul id=\"error_list\"></ul>").appendTo("#error_explanation");
+
+<% @organization.errors.each do |field, msg| %>
+$("label[for='organization_<%= field %>']").addClass("label_with_errors");
+$("#organization_<%= field %>").addClass("field_with_errors");
+$("<li><%= escape_javascript("#{field.to_s.camelize} #{msg}") %></li>").appendTo("#error_list");
+<% end %>
+$("#error_explanation").show();
+
+<% end %>

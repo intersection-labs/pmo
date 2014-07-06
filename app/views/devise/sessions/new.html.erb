@@ -1,0 +1,72 @@
+<% content_for :title, "Sign in" %>
+
+<style type="text/css">
+<!--
+
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#user_password {
+  	border-radius: 0;
+	border-radius: 0;
+}
+#user_password_confirmation {
+	margin-bottom: 10px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+}
+
+-->
+</style>
+
+		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name),  :html => {:class => "form-signin"}) do |f| %>
+		<h2 class="form-signin-heading">Log in</h2>
+			<div>
+				<%= f.email_field :email, :autofocus => true,:class => "form-control",  :placeholder => "example@domain.com" %>
+			</div>    
+			<div>
+				<%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+			</div>
+
+			<div>
+				<% if devise_mapping.rememberable? -%>
+					<label for="user[rememberme]" class="pure-checkbox">
+					                
+					<%= f.check_box :remember_me %> I've read the terms and conditions
+					</label>
+				<% end -%>
+			</div>
+				<div><%= f.submit "Sign in", :class=> "btn btn-lg btn-primary btn-block"   %>
+			</div>
+
+			<%= render "devise/shared/links" %>
+		</fieldset>
+		</form>
+		<% end %>

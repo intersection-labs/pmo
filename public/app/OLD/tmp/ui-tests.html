@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>PMO</title>
+<link href="../res/fluid.css" rel="stylesheet" type="text/css" />
+<link href="../res/widgets.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+
+
+-->
+</style>
+<script language="JavaScript" type="text/javascript" src="../res/basics.R1.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/constants.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/eap.R1.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/fs-config.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/fluid.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/pmo.js"></script>
+<script>
+function loadPage() {
+	Fluid.init();
+	Fluid.pack();
+	Node.prototype.x = {node:this};
+	Node.prototype.x.something = function() {console.log("aha! "+this.offsetHeight);};
+	Node.prototype.x.something2 = function() {console.log("aha! "+this.node);};
+	DOM.id("header").x.something();
+	DOM.id("header").x.something2();
+	Node.prototype.ext = function() {
+		this.a = {};
+		this.a.node = this;
+		this.a.something = function() {console.log("aha! "+this.node.offsetHeight);};
+		return this;
+	};
+	DOM.id("header").ext().a.something();
+
+	Node.prototype.b = function() {
+		var extensions = {};
+		extensions.node = this;
+		extensions.getPosition = function() {return DOM.getPosition(this.node);};
+		return extensions;
+	};
+	Utils.log(DOM.id("footer").b().getPosition());
+	
+	Utils.log(document.createElement("div").b().getPosition());
+	Utils.log(document.createElement("div").b().node);
+
+	
+	//DOM.id("a").xGetPosition();
+	//DOM.id("a").x().getPosition();
+	//node.x.getPosition();
+}
+</script>
+</head>
+
+<body class="fnt-normal" onload="loadPage()">
+<table id="fluid-container">
+	<tr>
+		<td>
+		<table id="header">
+			<tr>
+				<td id="header-left">
+					<table>
+						<tr>
+							<td class="header-c-logo"><img src="../img/logo.png"/></td>
+							<td class="header-c-icon pointer"><img src="../img/icon-settings.png"/></td>
+							<td class="header-c-icon pointer"><img src="../img/icon-search.png"/></td>
+							<td class="header-c-icon pointer"><img src="../img/icon-help.png"/></td>
+						</tr>
+					</table>
+				</td>
+				<td id="header-right">
+					<table align="right">
+						<tr>
+							<td class="header-c-text pointer">Carlo Abruzzo</td>
+							<td class="header-c-separator"><img src="../img/separator.png"/></td>
+							<td class="header-c-text pointer">Sign Out</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr id="fluid-container-tr">
+		<td>
+			<div id="fluid-container-div">
+			<table id="fluid-container-table">
+				<tr id="fluid-grid">
+
+					<!-- This is where Fluid columns are added -->
+
+					<!-- Column 1 -->
+					<td class="fluid-col">
+						<div class="fluid-form" style="width:250px; padding-top:0px; padding-bottom:0px">
+						</div>
+					</td>
+
+					<!-- Column 2 -->
+					<td class="fluid-col">
+						<div class="fluid-form" style="width:280px">
+							<table class="fluid-grid">
+								<tr>
+									<td class="fluid-cell-view">
+										<div class="wg-title">FT Consulting</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="fluid-cell-view">
+										<table class="wg-button-grid">
+											<tr>
+												<td class="wg-button-grid" width="50%">Programs</td>
+												<td class="wg-button-grid" width="50%">People</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td class="fluid-cell-view">
+										<div class="wg-text"><a href="http://ftconsulting.com">ftconsulting.com</a></div>
+										<div class="wg-text">221 employees</div>
+										<div class="wg-text">
+										FT Consulting offers project and programme management, application development and outsourcing services for clients in multiple industries: Banking, Insurance, Oil & Gas, Media, Retail.
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="fluid-cell-view">
+										<div class="wg-user-label">Project Managers:</div>
+										<div class="wg-user-company">Anna Fiore</div>
+										<div class="wg-user-external">AJ</div>
+										<div class="wg-user-company">Carlo Abruzzo</div>
+										<div class="wg-user-group">Innovair</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="fluid-footer" style="width:280px">
+							<table style="width:100%; padding:10px; padding-left:20px; padding-right:20px">
+								<tr>
+									<td style="width:50%; text-align:left">
+										<input type="button" class="button-leave">
+									</td>
+									<td style="width:50%; text-align:right">
+										<input type="button" class="button-edit">
+										<input type="button" class="button-history" style="margin-left:5px">
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+
+					<!-- Column 3 -->
+					<td class="fluid-col">
+						<div class="fluid-edit">Editing</div>
+						<div class="fluid-form" style="width:280px">
+							<table class="fluid-grid">
+								<tr>
+									<td class="fluid-cell-edit" style="">
+										<div class="wg-label">Title &nbsp;<span style="color:#FA0000">*</span></div>
+										<input class="wg-textbox" type="text" style="width:200px" />
+									</td>
+								</tr>
+								<tr>
+									<td class="fluid-cell-edit" style="">
+										<div class="wg-label">Start Date &nbsp;<span style="color:#FA0000">*</span></div>
+										<div class="wg-datepicker-box">
+											<table>
+												<tr>
+													<td style="width:130px"><input class="wg-datepicker-input" type="text" name="startDate" value="05/10/2012"></input></td>
+													<td style="background-color:#FFFFFF;" class="wg-datepicker-icon-cell"><input type="button" class="wg-datepicker-icon" /></td>
+												</tr>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="fluid-cell-edit">
+										<div class="wg-label">Description &nbsp;<span style="color:#FA0000">*</span></div>
+										<textarea class="wg-textarea" style="width:228px; height:100px">Project aim is to build an interface to Innovair's bak end systems in order to expose data and services to our web site. This project is running in parallel with the Web Billing Platform. The interface will be based in a Services Oriented Architecture (SOA) to enable future interoperability with other systems.</textarea>
+									</td>
+								</tr>
+								<tr>
+									<td class="fluid-cell-edit">
+										<div class="wg-text">
+										Text goes here
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="fluid-footer" style="width:280px">
+							<table style="width:100%; padding:10px; padding-left:20px; padding-right:20px">
+								<tr>
+									<td style="width:50%; text-align:left">
+										<input type="button" class="button-leave">
+									</td>
+									<td style="width:50%; text-align:right">
+										<input type="button" class="button-edit">
+										<input type="button" class="button-history" style="margin-left:5px">
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+			</div>
+		</td>
+	</tr>
+    <tr>
+        <td id="footer"></td>
+    </tr>
+</table>
+</body>
+</html>

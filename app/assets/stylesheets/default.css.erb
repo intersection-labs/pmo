@@ -1,0 +1,272 @@
+h3 {
+	margin-bottom: 0px;
+}
+
+
+
+
+
+
+div.green {
+	background-color: #99FF99
+}
+
+div.amber {
+	background-color: #FFFF99
+}
+
+div.red {
+	background-color: #FF8080
+}
+
+/* Curled paper box - cards */
+.box 
+{
+  position: relative;
+  width: 100%;
+ 
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 2em 1.5em;
+  color: rgba(0,0,0, .8);
+  /*text-shadow: 0 1px 0 #fff; */
+  line-height: 1.5;
+  margin: 60px auto;
+}
+
+
+.box:before, .box:after 
+{
+  z-index: -1; 
+  position: absolute; 
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%; 
+  top: 80%;
+  max-width:300px;
+  background: rgba(0, 0, 0, 0.7); 
+  -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);   
+  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  -webkit-transform: rotate(-3deg);    
+  -moz-transform: rotate(-3deg);   
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.box:after 
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+/* ------- end of curled box ---------------*/
+
+
+
+
+
+
+table {
+	margin:0 auto;
+	width: 80%;
+	border-width: 1px;
+	border-color: black;
+}
+
+td {
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+	padding: 5px;
+}
+
+input {
+	width: 400px;
+}
+
+textarea {
+	width: 400px;
+	height: 120px;
+}
+
+
+button {
+	display: inline;
+}
+/*
+The content `<div>` is where all your content goes.
+*/
+.content {
+    margin: 0 auto;
+    padding: 0 2em;
+    max-width: 800px;
+    margin-bottom: 50px;
+    line-height: 1.6em;
+}
+
+.header {
+     margin: 0;
+     color: #333;
+     text-align: center;
+     padding: 2.5em 2em 0;
+     border-bottom: 1px solid #eee;
+ }
+    .header h1 {
+        margin: 0.2em 0;
+        font-size: 3em;
+        font-weight: 300;
+    }
+     .header h2 {
+        font-weight: 300;
+        color: #ccc;
+        padding: 0;
+        margin-top: 0;
+    }
+
+.content-subhead {
+    margin: 50px 0 20px 0;
+    font-weight: 300;
+    color: #888;
+}
+
+.label_with_errors {
+	color: red;
+}
+
+//holding box for error messages
+
+
+#error_explanation {
+	color: #7C0A02;
+	border-radius: 5px 5px 5px 5px;
+	background-color: #FF8080;
+	border-color: #CC0000;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+}
+//input for field with errors 
+field_with_errors {
+	
+}
+
+/* Buttons: */
+input.button-save {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -4px -4px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+input.button-save:hover {
+	background-position: -34px -4px;
+	cursor: pointer;
+}
+input.button-save-inactive {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -64px -4px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+input.button-history {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -4px -34px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+input.button-history:hover {
+	background-position: -34px -34px;
+	cursor: pointer;
+}
+input.button-edit {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -4px -64px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+input.button-edit:hover {
+	background-position: -34px -64px;
+	cursor: pointer;
+}
+input.button-add {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -4px -94px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+input.button-add:hover {
+	background-position: -34px -94px;
+	cursor: pointer;
+}
+input.button-leave {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -4px -154px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+input.button-leave:hover {
+	background-position: -34px -154px;
+	cursor: pointer;
+}
+input.button-leave-inactive {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -64px -154px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+input.button-prev-inactive {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -4px -184px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+}
+input.button-next-inactive {
+	background: #FFFFFF url(<%= asset_path 'buttons.png' %>) no-repeat;
+	background-position: -4px -214px;
+	height: 28px;
+	width: 28px;
+	border: 1px solid #FFFFFF;
+	outline: none;
+}
+
+
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 48em) {
+
+    /* We can align the menu header to the left, but float the
+    menu items to the right. */
+    .home-menu {
+        text-align: left;
+    }
+        .home-menu ul {
+            float: right;
+        }
+
+    
+
+}

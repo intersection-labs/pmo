@@ -1,0 +1,19 @@
+<% if !@issue.errors.any? %> 
+
+$("<%= escape_javascript(render @issue) %>").appendTo("#issue_list");
+$( "#dialog-form" ).dialog( "close" );
+$("#issue<%= @issue.id %>").css({'background-color': 'yellow'}).animate({'background-color':'white'}, 2000);
+
+<% else %>
+$("<h3>Please correct the following errors</h3>").appendTo("#error_explanation");
+
+$("<ul id=\"error_list\"></ul>").appendTo("#error_explanation");
+
+<% @issue.errors.each do |field, msg| %>
+$("label[for='issue_<%= field %>']").addClass("label_with_errors");
+$("#issue_<%= field %>").addClass("field_with_errors");
+$("<li><%= escape_javascript("#{field.to_s.camelize} #{msg}") %></li>").appendTo("#error_list");
+<% end %>
+$("#error_explanation").show();
+
+<% end %>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>	<%= yield(:title) %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+<style type="text/css">
+<!--
+
+.header-c-logo {
+padding-right: 15px;
+text-align: left;
+}
+
+.header-c-icon pointer {
+	padding-left: 7px;
+	vertical-align: bottom;
+	text-align: left;
+}
+
+/* Other: */
+.pointer {
+	cursor: pointer;
+}
+
+header nav {
+	float: left;
+}
+
+#userDetails {
+	padding: 10px;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	color: #333333;
+	margin-left: 80%;
+}
+
+#userBar {
+	background-color: white;
+	padding: 10px;
+	margin: 0px;
+	width: 100%;
+	box-shadow: 0 0 0 0 white, 0 1px 3px #999999;
+}
+
+-->
+</style>
+</head>
+<body>
+	<header id="userBar">
+		<nav>
+			<%= image_tag 'logo.png', { "class"=>"header-c-logo"} %>
+			<%= image_tag 'icon-settings.png', { "class"=>"header-c-icon-pointer"}  %>
+			<%= image_tag 'icon-search.png', { "class"=>"header-c-icon-pointer"} %>
+			<%= image_tag 'icon-help.png', { "class"=>"header-c-icon-pointer"} %>
+		</nav>
+		
+		<section id="userDetails"class="header-c-text pointer">
+			Carlo Abruzzo |	Sign Out
+		</section>
+	</header>
+		
+	
+	
+<%= yield %>
+
+<footer>
+	<nav>
+		<ul>
+			<li>
+				<%= link_to 'About us', 'about' %> |
+			</li>
+			<li>
+				<%= link_to 'What do we do?', 'whatdowedo' %> |
+			</li>
+			<li>
+				<%= link_to 'Contact us', 'contact' %> |
+			</li>
+			<li>
+			 	<%= link_to 'Help', 'help' %> |
+			</li>
+			<li>
+				<%= link_to 'Blog', 'blog' %> |		
+			</li>
+		</ul>	
+	</nav>
+	&copy Mana.ge 2013	
+</footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+		<%= form_for(@issue,  remote: true, :format => "js", :authenticity_token => true, html: {class: "pure-form pure-form-aligned" }) do |f| %>
+		
+			<div id="error_explanation" style="display: none">
+			
+			<% if @issue.errors.any? %>
+					<h2>
+						<%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:
+					</h2>
+					<ul>
+						<% @issue.errors.full_messages.each do |msg| %>
+						<li>
+							<%= msg %>
+						</li>
+						<% end %>
+					</ul>
+			<% end %>
+			</div>        
+			
+			<div class="pure-control-group">
+				<%= f.label :title %>
+				<%= f.text_field :title, { :placeholder => "Summary title"} %>
+			</div>
+			<div class="pure-control-group">
+				<%= f.label :description %>
+				<%= f.text_area :description, { :placeholder => "What is the issue?"} %>
+			</div>
+			
+			<div class="pure-control-group">
+				<%= f.label :status %>
+				<select>
+					<option>open</option>
+					<option>closed</option>
+				</select>
+			</div>
+			
+			<div class="pure-control-group">
+				<%= f.label :date_closed %>
+				<%= f.date_select :date_closed %>
+			</div>
+
+			<div class="pure-controls">
+				<%= f.submit 'Submit issue', :class => 'pure-button pure-button-primary' %>
+			</div>
+		<% end %>

@@ -1,0 +1,12 @@
+<h1>Listing all programs</h1>
+
+<% if !@programs.empty? %>
+
+	<%= render @programs %>
+  
+<% else %>
+<p>There are currently no programs</p>
+<% end %>
+<br>
+
+<%= link_to 'New Program', new_organization_program_path(params[:organization_id]) %>

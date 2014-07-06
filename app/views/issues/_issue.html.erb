@@ -1,0 +1,19 @@
+<tr id="issue<%= issue.id %>">
+    <td><%= issue.title %></td>
+    <td><%= truncate(issue.description, :length=>200) { link_to("read more",issue)}  %>
+
+    <td><%= button_to '', issue, :class => "inline button-history" %>
+    <input type="button" class="inline button-edit" id="edit-issue-<%= issue.id %>">
+	<%= button_to "", issue, method: :delete, data: { confirm: 'Are you sure?' }, :class => "inline button-leave" %></td>
+	
+
+  </tr>
+
+<script type="text/javascript">
+	$( "#edit-issue-<%= issue.id %>" )
+    .click(function() {
+		$("#dialog-form").load('/../../issues/<%= issue.id %>/edit');
+
+      $( "#dialog-form" ).dialog( "open" );
+    });
+</script>

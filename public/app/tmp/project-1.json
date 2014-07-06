@@ -1,0 +1,7 @@
+[{
+"id":1,
+"name":"Back Office API",
+"description":"Project aim is to build an interface to Innovair's bak end systems in order to expose data and services to our web site. This project is running in parallel with the Web Billing Platform. The interface will be based in a Services Oriented Architecture (SOA) to enable future interoperability with other systems.",
+"startDate":"5 October 2012",
+"endDate":"25 November 2013"
+}]

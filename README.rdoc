@@ -1,0 +1,77 @@
+= README 
+
+Contents of Readme
+1. Environment setup
+2. Running the application
+3. Pushing changes to github
+4. Pulling changes from github
+
+
+==1. Environment setup
+
+===OS X
+
+Start the Terminal application
+
+<tt>$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"</tt>
+
+<tt>$ brew update </tt>
+
+<tt>$ brew install rbenv</tt>
+
+<tt>$ brew install ruby-build</tt>
+
+<tt>$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile</tt>
+
+<tt>$ rbenv install 2.0.0-p247</tt>
+
+<tt>$ rbenv global 2.0.0-p247</tt>
+
+<tt>$ gem install rails</tt>
+
+<tt>$ mkdir ProgramManagement</tt>
+
+<tt>$ cd ProgramManagement</tt>
+
+Click fork in the 
+
+$ git clone https://github.com/jonturnbull/ProgramManagement.git
+
+
+==2. - Running the application 
+
+$ cd ProgramManagement
+
+$ rails server
+
+Then go to http://localhost:3000/
+
+
+
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+Please feel free to use a different markup language if you do not plan to run
+<tt>rake doc:app</tt>.

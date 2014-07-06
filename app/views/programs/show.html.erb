@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= link_to @program.organization.name, @program.organization %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @program.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @program.description %>
+</p>
+
+<p>
+	This program has <%= pluralize(@program.projects.count, 'project') %> associated with it
+</p>
+
+<% if !@program.projects.empty? %>
+<ul>
+<% @program.projects.each do |project| %>
+<li><%= link_to project.name, project %></li>
+<% end %>
+</ul>
+<% end %>
+
+<%= link_to 'Edit this program', edit_program_path(@program) %> |
+<%= link_to 'Add new project', new_program_project_path(@program) %> | 
+<%= link_to 'View all projects for this program', program_projects_path(@program) %>
+
+

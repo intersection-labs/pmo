@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<a class="pure-button" href="#">
+    <i class="icon-shopping-cart icon-large"></i>
+    Checkout
+</a>
+<button class="pure-button">
+    <i class="fa fa-th-list"></i>
+    Settings
+</button>
+<i class="fa fa-camera-retro"></i> fa-camera-retro
+<p>
+  <strong>Organization:</strong>
+  <%= link_to @project.program.organization.name, @project.program.organization %>
+</p>
+
+<p>
+  <strong>Program:</strong>
+  <%= link_to @project.program.name, @project.program %>
+</p>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+There are currently <%= pluralize(@project.issues.count, 'issue') %> raised against this project
+
+<%= link_to 'Add new issue', new_project_issue_path(@project) %> | 
+
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
