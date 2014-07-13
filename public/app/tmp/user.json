@@ -1,0 +1,26 @@
+{
+	"header": {
+		"status": "0"
+	},
+	"data": {
+		"user": {
+			"id": "9827459872985794",
+			"personalCard": {			
+				"firstName": "Carlos",
+				"lastName": "Silva",
+				"email": "carlos8silva@gmail.com",
+				"mobile": "+44 (0)79 3184 3883"
+			},
+			"businessCard": {
+				"firstName": "Carlos",
+				"lastName": "Silva",
+				"email": "carlos.silva@workshare.com",
+				"mobile": "+44 (0)79 3184 3883",
+				"company": {
+					"id": "882873459023443",
+					"name": "Workshare"
+				}
+			}
+		}
+	}
+}

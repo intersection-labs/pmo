@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>PMO</title>
+<link href="../res/connector.css" rel="stylesheet" type="text/css" />
+<link href="../res/widgets.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.card {
+	width: 500px;
+	background-color: white;
+	margin-top: 20px;
+	margin-left: 20px;
+	padding: 10px;
+	box-shadow: 0 0 0 0 white, 0 1px 3px #999999;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.card-photo {
+}
+.card-name {
+}
+-->
+</style>
+<script language="JavaScript" type="text/javascript" src="../res/basics.R1.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/constants.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/widgets.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/eap.R1.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/fs-config.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/fluid.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/pmo.js"></script>
+<script>
+function loadPage() {
+//	Fluid.init();
+//	PMO.listOrgs();
+//	Fluid.pack();
+}
+
+function loadData() {
+}
+
+function saveData() {
+	console.log(DOM.id("form1").summary.value);
+	console.log(DOM.id("form1").email.value);
+	console.log(DOM.id("form1").mobile.value);
+}
+</script>
+</head>
+
+<body class="fnt-normal" onload="loadPage()">
+<table id="fluid-container">
+	<tr>
+		<td>
+		<table id="header">
+			<tr>
+				<td id="header-left">
+					<table>
+						<tr>
+							<td class="header-c-logo"><img src="../img/logo.png"/></td>
+							<td class="header-c-icon pointer"><img src="../img/icon-settings.png"/></td>
+							<td class="header-c-icon pointer"><img src="../img/icon-search.png"/></td>
+							<td class="header-c-icon pointer"><img src="../img/icon-help.png"/></td>
+						</tr>
+					</table>
+				</td>
+				<td id="header-right">
+					<table align="right">
+						<tr>
+							<td class="header-c-text pointer">Carlo Abruzzo</td>
+							<td class="header-c-separator"><img src="../img/separator.png"/></td>
+							<td class="header-c-text pointer">Sign Out</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr id="fluid-container-tr">
+		<td>
+			<div id="fluid-container-div">
+			<table id="fluid-container-table">
+				<tr id="fluid-grid">
+					<form id="form1">
+					<div class="card">
+						<div class="wg-subtitle">Carlos Silva</div>
+						<div>
+							<textarea name="summary" style="width:480px; height:50px; margin-bottom:10px">Consultant turned product manager, technology enthusiast, world explorer, obsessed with personal management and productivity, ENTP</textarea>
+						</div>
+						<div class="wg-label">Email: <input name="email" type="text" style="width:200px" value="carlos8silva@gmail.com"></div>
+						<div class="wg-label">Mobile: <input name="mobile" type="text" style="width:200px" value="079 3184 3883"></div>
+						<div class="wg-label">Phone: <input name="phone" type="text" style="width:200px" value="0207 539 5508"></div>
+						<div class="wg-label">Address: <input name="address" type="text" style="width:200px" value="1A Glazbury Road, London W14 9AS"></div>
+						<div class="wg-text" style="text-align:right"><input type="button" value="Save" onclick="saveData()"></div>
+					</div>
+					</form>
+					<div class="wg-subtitle" style="margin-left:20px; margin-top:20px">Other information:</div>
+					<div class="wg-label" style="margin-left:20px">Email: <input type="text" style="width:200px" value="carlos.s.pereira@gmail.com"></div>
+				
+					<!-- This is where Fluid columns are added -->
+				</tr>
+			</table>
+			</div>
+		</td>
+	</tr>
+    <tr>
+        <td id="footer"></td>
+    </tr>
+</table>
+</body>
+</html>

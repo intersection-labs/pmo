@@ -580,152 +580,59 @@ function FieldWrapper(args, fc, index) {
 
 ///////////////////////////////////////////////////////////////////////////////
 // AjaxRequest class
-// Note: this only works with the EAP standard XML message format
-// TODO separate Ajax and EAP specific functionality
+// Handles raw AJAX requests
 ///////////////////////////////////////////////////////////////////////////////
 
 function AjaxRequest(args) {
-	
-	this.url = args.url;
-	this.method = args.method == null ? "GET" : args.method.toUpperCase();
-	this.async = args.async==null ? true : args.async;
-	this.parameters = args.parameters;
-	this.onSuccess = args.onSuccess;
-	this.onFailure = args.onFailure;
+
+	// Check args:
+	Utils.checkArgs(args, "url", "method=get", "async=true", "cors=false", "onLoad");
+	args.method = args.method.toLowerCase();
+	Utils.checkArgValues(args.method, "get", "post");
+	if(args.async) { Utils.checkArgValues(args.async, true, false); }
+	if(args.cors) { Utils.checkArgValues(args.cors, true, false); }
+	// TODO check params arg
 	
 	this.send = function() {
-		request = this._getXmlHttp();
-		request.onreadystatechange = this._onChangeState;
-		request.onSuccess = this.onSuccess;
-		request.onFailure = this.onFailure;
-		// Build request parameters:
-		var reqParams = null;
-		if(this.parameters != null) {
-			reqParams = "";
-			for(var i=0; i<this.parameters.length; i++) {
-				reqParams += (this.parameters[i].name + "=" + this.parameters[i].value);
-				if(i != this.parameters.length-1) {
-					reqParams += "&";
-				}
+		var request = this._getXmlHttp();
+		// Handle cross-domain requests:
+		if(args.cors) {
+			if("withCredentials" in request) {
+				request.withCredentials = true;
 			}
-		}
-		if(this.method == "GET") {
-			request.open(this.method, this.url + (reqParams != null ? "?" + reqParams : ""), this.async);
-			request.send(null);
-		}
-		else if(this.method == "POST") {
-			request.open(this.method, this.url, this.async);
-			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			request.setRequestHeader("Content-length", reqParams.length);
-			request.setRequestHeader("Connection", "close");
-			request.send(reqParams);
-		}
-		else {
-			Logger.error("wrong method argument: "+this.method);
-			return;
-		}
-	};
-	
-	this._getXmlHttp = function() {
-		try { return new XMLHttpRequest(); } catch(e) {}
-		try { new ActiveXObject("Msxml2.XMLHTTP.6.0"); } catch(e) {}
-		try { new ActiveXObject("Msxml2.XMLHTTP.3.0"); } catch(e) {}
-		try { new ActiveXObject("Msxml2.XMLHTTP"); } catch(e) {}
-		try { new ActiveXObject("Microsoft.XMLHTTP"); } catch(e) {}
-		throw "XML HTTP not supported";
-	};
-	
-	this._onChangeState = function() {
-		if(this.readyState == 4) {
-			try {
-				// Note: status is 0 if the script is run on a local drive
-				if(this.status != 200 && this.status != 0) {
-					throw "server status code: "+this.status+(this.statusText ? " ("+this.statusText+")" : "");
-				}
-				var xml = this.responseXML;
-				if(xml == null) {
-					throw "XML response is null. Text: '"+this.responseText+"'";
-				}
-				if(this.responseXML.firstChild == null) {
-					throw "response not in XML format. Text: '"+this.responseText+"'";
-				}
-				var status = xml.getElementsByTagName("status")[0].childNodes[0].nodeValue;
-				if(status.toUpperCase() == "OK") {
-					try {
-						this.onSuccess(xml);
-					}
-					catch(error) {
-						Logger.error("[AjaxRequest error on custom onSuccess callback]: "+ error);
-					}
-				}
-				else if(status.toUpperCase() == "ERROR") {
-					var errorCode = xml.getElementsByTagName("error-code").length > 0 ? xml.getElementsByTagName("error-code")[0].childNodes[0].nodeValue : null;
-					var message = xml.getElementsByTagName("message").length > 0 ? xml.getElementsByTagName("message")[0].childNodes[0].nodeValue : null;
-					try {
-						this.onFailure(errorCode, message);
-					}
-					catch(error) {
-						Logger.error("[AjaxRequest error on custom onFailure callback]: "+ error);
-					}
+			else {
+				if(typeof XDomainRequest == "undefined") {
+					throw new Error("cross-domain requests are not supported");
 				}
 				else {
-					throw "unknown response status: "+status;
+					request = new XDomainRequest();
 				}
 			}
-			catch(error) {
-				Logger.error("[In AjaxRequest]: "+error);
-			}
 		}
-	};
-	
-	return this;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-// AjaxRequest2 class
-// WIP to use JSON functionality instead of XML
-///////////////////////////////////////////////////////////////////////////////
-
-function AjaxRequest2(args) {
-	
-	this.url = args.url;
-	this.method = args.method == null ? "GET" : args.method.toUpperCase();
-	this.async = args.async==null ? true : args.async;
-	this.parameters = args.parameters;
-	this.onSuccess = args.onSuccess;
-	this.onFailure = args.onFailure;
-	
-	this.send = function() {
-		request = this._getXmlHttp();
-		request.onreadystatechange = this._onChangeState;
-		request.fluid = {};
-		request.fluid.onSuccess = this.onSuccess;
-		request.fluid.onFailure = this.onFailure;
 		// Build request parameters:
 		var reqParams = null;
-		if(this.parameters != null) {
+		if(args.parameters != null) {
 			reqParams = "";
-			for(var i=0; i<this.parameters.length; i++) {
-				reqParams += (this.parameters[i].name + "=" + this.parameters[i].value);
-				if(i != this.parameters.length-1) {
+			for(var i=0; i<args.parameters.length; i++) {
+				reqParams += (args.parameters[i].name + "=" + args.parameters[i].value);
+				if(i != args.parameters.length-1) {
 					reqParams += "&";
 				}
 			}
 		}
-		if(this.method == "GET") {
-			request.open(this.method, this.url + (reqParams != null ? "?" + reqParams : ""), this.async);
+		// Send request:
+		request.onreadystatechange = this._onChangeState;
+		if(args.method == "get") {
+			request.open(args.method, args.url + (reqParams != args ? "?" + reqParams : ""), args.async);
 			request.send(null);
 		}
-		else if(this.method == "POST") {
-			request.open(this.method, this.url, this.async);
+		else if(args.method == "post") {
+			request.open(args.method, args.url, args.async);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			request.setRequestHeader("Content-length", reqParams.length);
-			request.setRequestHeader("Connection", "close");
 			request.send(reqParams);
 		}
 		else {
-			throw "wrong method argument: "+this.method;
+			throw new Error("unexpected HTTP method: "+args.method);
 		}
 	};
 	
@@ -735,27 +642,77 @@ function AjaxRequest2(args) {
 		try { new ActiveXObject("Msxml2.XMLHTTP.3.0"); } catch(e) {}
 		try { new ActiveXObject("Msxml2.XMLHTTP"); } catch(e) {}
 		try { new ActiveXObject("Microsoft.XMLHTTP"); } catch(e) {}
-		throw "XML HTTP not supported";
+		throw new Error("XML HTTP not supported");
 	};
 	
 	this._onChangeState = function() {
 		if(this.readyState == 4) {
-			// Note: status is 0 if the script is run on a local drive
-			if(this.status != 200 && this.status != 0) {
-				throw "server status code: "+this.status+(this.statusText ? " ("+this.statusText+")" : "");
+			if(this.status == 200) {
+				args.onLoad(this);
 			}
-			if(Utils.not(this.responseText)) {
-				throw "Ajax response is null";
+			else {
+				if(args.onError) {
+					args.onError(this);
+				}
+				else {
+					throw new Error("Could not process ajax request. Server status code: "+this.status+(this.statusText ? " ("+this.statusText+")" : ""));
+				}
 			}
-			var data = eval(this.responseText);
-			// TODO do some sort of parsing to check if the URL returned an error response
-			this.fluid.onSuccess(data);
 		}
 	};
 	
 	return this;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+// JsonRequest class
+// Handles JSON requests
+///////////////////////////////////////////////////////////////////////////////
+
+function JsonRequest(args) {
+	Utils.checkArgs(args, "onLoad");
+	args.userOnLoad = args.onLoad;
+	args.userOnError = args.onError;
+	args._process = function(req) {
+	};
+	args.onLoad = function(req) {
+		try {
+			var json = JSON.parse(req.responseText);
+			if(json.header.status == "ok") {
+				args.userOnLoad(json);
+			}
+			else if(json.header.status == "error") {
+				args.userOnError(json.data.message+". Details: "+json.data.details);
+			}
+			else {
+				throw new Error("unexpected status: "+json.header.status);
+			}
+		}
+		catch(e) {
+			args.userOnError("JSON parse error. Details: "+e);
+		}
+	};
+	args.onError = function(req) {
+		if(req.status == 500) {
+			args.onLoad(req);
+		}
+		else {
+			var details = Utils.not(req.responseText) ? "&lt;empty&gt;" : req.responseText;
+			args.userOnError("request failed with HTTP status code "+req.status+". Details: "+details);
+		}
+	}
+	this._ajax = new AjaxRequest(args);
+	this.send = function() {
+		try {
+			this._ajax.send();
+		}
+		catch(e) {
+			args.userOnError("request failed. Details: "+e);
+		}
+	};
+	return this;
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////

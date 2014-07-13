@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>PMO</title>
+<link href="../res/connector.css" rel="stylesheet" type="text/css" />
+<link href="../res/widgets.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.card {
+	width: 500px;
+	background-color: white;
+	margin-top: 20px;
+	margin-left: 20px;
+	padding: 10px;
+	box-shadow: 0 0 0 0 white, 0 1px 3px #999999;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.text {
+	width: 200px;
+}
+-->
+</style>
+<script language="JavaScript" type="text/javascript" src="../res/basics.R1.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/constants.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/widgets.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/eap.R1.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/fs-config.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/fluid.js"></script>
+<script language="JavaScript" type="text/javascript" src="../res/pmo.js"></script>
+<script>
+var server = "http://localhost:8080";
+//var server = "http://zippy-haiku-622.appspot.com";
+
+function runTests() {
+	var req = new JsonRequest({url: server+"/users/5066549580791808", method:"get",
+		cors:true,
+		parameters: { email:"carlos8silva@gmail.com", firstName:"Carlos", lastName:"Silva" },
+		onLoad: function(resp) {
+			DOM.id("user").innerHTML = "Retrieved user: "+resp.data.user.personalCard.firstName+" "+resp.data.user.personalCard.lastName;
+		},
+		onError: function(msg) {
+			DOM.id("user").innerHTML = "<span style=\"color:red\">"+msg+"</span>";
+		}
+	});
+	req.send();
+}
+
+function registerUser() {
+	var params = new Array({name:"first_name", value:DOM.id("form1").first_name.value}, {name:"last_name", value:DOM.id("form1").last_name.value}, {name:"email", value:DOM.id("form1").email.value}, {name:"mobile", value:DOM.id("form1").mobile.value});
+	var req = new JsonRequest({url: server+"/users/register", method:"post",
+		cors:true,
+		parameters: params,
+		onLoad: function(data) {
+			DOM.id("post-msg").style.color = "#00A000";
+			DOM.id("post-msg").innerHTML = "success: "+data;
+		},
+		onError: function(req) {
+			DOM.id("post-msg").style.color = "#00FF00";
+			DOM.id("post-msg").innerHTML = "fail: "+req.status;
+		}
+	});
+	req.send();
+}
+</script>
+</head>
+
+<body class="fnt-normal" onload="runTests()">
+<div class="card" id="user">
+</div>
+<div class="card">
+	<form id="form1">
+	<table width="100%">
+		<tr>
+			<td colspan="2"><div class="wg-subtitle">Register user:</div></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp</td>
+		</tr>
+		<tr>
+			<td width="100"><div class="wg-label">First name:</div></td>
+			<td><input type="text" class="text" id="first_name" name="first_name"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Last name:</div></td>
+			<td><input type="text" class="text" id="last_name" name="last_name"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Email:</div></td>
+			<td><input type="text" class="text" id="email" name="email"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Mobile:</div></td>
+			<td><input type="text" class="text" id="mobile" name="mobile"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><span id="post-msg"></span></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align:right"><input type="button" value="post" onclick="registerUser()"></td>
+		</tr>
+	</table>
+	</form>
+</div>
+</body>
+</html>

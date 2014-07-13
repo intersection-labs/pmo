@@ -883,7 +883,7 @@ var Utils = {
 	},
 
 	not: function(arg) {
-		if(arg == undefined || arg == null) {
+		if(!arg || arg == undefined || arg == null || arg == "") {
 			return true;
 		}
 		return false;
