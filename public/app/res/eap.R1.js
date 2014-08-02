@@ -623,7 +623,7 @@ function AjaxRequest(args) {
 		// Send request:
 		request.onreadystatechange = this._onChangeState;
 		if(args.method == "get") {
-			request.open(args.method, args.url + (reqParams != args ? "?" + reqParams : ""), args.async);
+			request.open(args.method, args.url + (reqParams != null ? "?" + reqParams : ""), args.async);
 			request.send(null);
 		}
 		else if(args.method == "post") {

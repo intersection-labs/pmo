@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>PMO</title>
+<title>connector.im</title>
 <link href="../res/connector.css" rel="stylesheet" type="text/css" />
 <link href="../res/widgets.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -30,13 +30,19 @@
 <script language="JavaScript" type="text/javascript" src="../res/fluid.js"></script>
 <script language="JavaScript" type="text/javascript" src="../res/pmo.js"></script>
 <script>
-var server = "http://localhost:8080";
-//var server = "http://zippy-haiku-622.appspot.com";
+//var server = "http://localhost:8080";
+var server = "http://zippy-haiku-622.appspot.com";
+
+function showCookie() {
+	DOM.id("cookie-msg").style.color = "#00A000";	
+	DOM.id("cookie-msg").innerHTML = "connector-session-id: "+getCookie("connector-session-id");	
+}
 
 function runTests() {
-	var req = new JsonRequest({url: server+"/users/5066549580791808", method:"get",
+	//var userId = "4890627720347648";
+	var userId = "5710239819104256";
+	var req = new JsonRequest({url: server+"/users/view/"+userId, method:"get",
 		cors:true,
-		parameters: { email:"carlos8silva@gmail.com", firstName:"Carlos", lastName:"Silva" },
 		onLoad: function(resp) {
 			DOM.id("user").innerHTML = "Retrieved user: "+resp.data.user.personalCard.firstName+" "+resp.data.user.personalCard.lastName;
 		},
@@ -47,18 +53,101 @@ function runTests() {
 	req.send();
 }
 
-function registerUser() {
-	var params = new Array({name:"first_name", value:DOM.id("form1").first_name.value}, {name:"last_name", value:DOM.id("form1").last_name.value}, {name:"email", value:DOM.id("form1").email.value}, {name:"mobile", value:DOM.id("form1").mobile.value});
-	var req = new JsonRequest({url: server+"/users/register", method:"post",
+function registerUser1() {
+	var params = new Array();
+	params.push({name:"first_name", value:DOM.id("form1").first_name.value});
+	params.push({name:"last_name", value:DOM.id("form1").last_name.value});
+	params.push({name:"email", value:DOM.id("form1").email.value});
+	params.push({name:"mobile", value:DOM.id("form1").mobile.value});
+	params.push({name:"phone", value:DOM.id("form1").phone.value});
+	var req = new JsonRequest({url: server+"/users/register/step1", method:"post",
 		cors:true,
 		parameters: params,
-		onLoad: function(data) {
-			DOM.id("post-msg").style.color = "#00A000";
-			DOM.id("post-msg").innerHTML = "success: "+data;
+		onLoad: function(resp) {
+			DOM.id("reg-1-msg").style.color = "#00A000";
+			DOM.id("reg-1-msg").innerHTML = "success, created user with ID "+resp.data.user.id;
+			// Pre-populate form 2:
+			DOM.id("first_name_2").value = DOM.id("first_name_1").value;
+			DOM.id("last_name_2").value = DOM.id("last_name_1").value;
 		},
-		onError: function(req) {
-			DOM.id("post-msg").style.color = "#00FF00";
-			DOM.id("post-msg").innerHTML = "fail: "+req.status;
+		onError: function(msg) {
+			DOM.id("reg-1-msg").style.color = "#FF0000";
+			DOM.id("reg-1-msg").innerHTML = "fail: "+msg;
+		}
+	});
+	req.send();
+}
+
+function registerUser2() {
+	var params = new Array();
+	params.push({name:"first_name", value:DOM.id("form2").first_name.value});
+	params.push({name:"last_name", value:DOM.id("form2").last_name.value});
+	params.push({name:"company", value:DOM.id("form2").company.value});
+	params.push({name:"email", value:DOM.id("form2").email.value});
+	params.push({name:"mobile", value:DOM.id("form2").mobile.value});
+	params.push({name:"phone", value:DOM.id("form2").phone.value});
+	var req = new JsonRequest({url: server+"/users/register/step2", method:"post",
+		cors:true,
+		parameters: params,
+		onLoad: function(resp) {
+			DOM.id("reg-2-msg").style.color = "#00A000";
+			DOM.id("reg-2-msg").innerHTML = "success, business card with ID "+resp.data.businessCard.id;
+		},
+		onError: function(msg) {
+			DOM.id("reg-2-msg").style.color = "#FF0000";
+			DOM.id("reg-2-msg").innerHTML = "fail: "+msg;
+		}
+	});
+	req.send();
+}
+
+function registerUser3() {
+	var params = new Array();
+	params.push({name:"password", value:DOM.id("form3").password.value});
+	var req = new JsonRequest({url: server+"/users/register/step3", method:"post",
+		cors:true,
+		parameters: params,
+		onLoad: function(resp) {
+			DOM.id("reg-3-msg").style.color = "#00A000";
+			DOM.id("reg-3-msg").innerHTML = "success!";
+		},
+		onError: function(msg) {
+			DOM.id("reg-3-msg").style.color = "#FF0000";
+			DOM.id("reg-3-msg").innerHTML = "fail: "+msg;
+		}
+	});
+	req.send();
+}
+
+function signIn() {
+	var params = new Array();
+	params.push({name:"email", value:DOM.id("form4").email.value});
+	params.push({name:"password", value:DOM.id("form4").password.value});
+	var req = new JsonRequest({url: server+"/users/sign-in", method:"post",
+		cors:true,
+		parameters: params,
+		onLoad: function(resp) {
+			DOM.id("sign-in-msg").style.color = "#00A000";
+			DOM.id("sign-in-msg").innerHTML = "success!";
+		},
+		onError: function(msg) {
+			DOM.id("sign-in-msg").style.color = "#FF0000";
+			DOM.id("sign-in-msg").innerHTML = "fail: "+msg;
+		}
+	});
+	req.send();
+}
+
+function signOut() {
+	var req = new JsonRequest({url: server+"/users/sign-out", method:"get",
+		cors:true,
+		onLoad: function(resp) {
+			DOM.id("sign-out-msg").style.color = "#00A000";
+			DOM.id("sign-out-msg").innerHTML = "success!";
+		},
+		onError: function(msg) {
+			DOM.id("sign-out-msg").style.color = "#FF0000";
+			DOM.id("sign-out-msg").innerHTML = "fail: "+msg;
 		}
 	});
 	req.send();
@@ -67,41 +156,166 @@ function registerUser() {
 </head>
 
 <body class="fnt-normal" onload="runTests()">
+
+<div class="card">
+	<table width="100%">
+		<tr>
+			<td colspan="2" style="text-align:right"><input type="button" value="Show cookie" onclick="showCookie()"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><span id="cookie-msg"></span></td>
+		</tr>
+	</table>
+</div>
+
 <div class="card" id="user">
 </div>
+
 <div class="card">
 	<form id="form1">
 	<table width="100%">
 		<tr>
-			<td colspan="2"><div class="wg-subtitle">Register user:</div></td>
+			<td colspan="2"><div class="wg-subtitle">Register user (step 1 - personal card):</div></td>
 		</tr>
 		<tr>
 			<td colspan="2">&nbsp</td>
 		</tr>
 		<tr>
 			<td width="100"><div class="wg-label">First name:</div></td>
-			<td><input type="text" class="text" id="first_name" name="first_name"></td>
+			<td><input type="text" class="text" id="first_name_1" name="first_name"></td>
 		</tr>
 		<tr>
 			<td><div class="wg-label">Last name:</div></td>
-			<td><input type="text" class="text" id="last_name" name="last_name"></td>
+			<td><input type="text" class="text" id="last_name_1" name="last_name"></td>
 		</tr>
 		<tr>
 			<td><div class="wg-label">Email:</div></td>
-			<td><input type="text" class="text" id="email" name="email"></td>
+			<td><input type="text" class="text" id="email_1" name="email"></td>
 		</tr>
 		<tr>
 			<td><div class="wg-label">Mobile:</div></td>
-			<td><input type="text" class="text" id="mobile" name="mobile"></td>
+			<td><input type="text" class="text" id="mobile_1" name="mobile"></td>
 		</tr>
 		<tr>
-			<td colspan="2"><span id="post-msg"></span></td>
+			<td><div class="wg-label">Phone:</div></td>
+			<td><input type="text" class="text" id="phone_1" name="phone"></td>
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align:right"><input type="button" value="post" onclick="registerUser()"></td>
+			<td colspan="2" style="text-align:right"><input type="button" value="Send" onclick="registerUser1()"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><span id="reg-1-msg"></span></td>
 		</tr>
 	</table>
 	</form>
 </div>
+
+<div class="card">
+	<form id="form2">
+	<table width="100%">
+		<tr>
+			<td colspan="2"><div class="wg-subtitle">Register user (step 2 - business card):</div></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp</td>
+		</tr>
+		<tr>
+			<td width="100"><div class="wg-label">First name:</div></td>
+			<td><input type="text" class="text" id="first_name_2" name="first_name"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Last name:</div></td>
+			<td><input type="text" class="text" id="last_name_2" name="last_name"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Company:</div></td>
+			<td><input type="text" class="text" id="company" name="company"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Email:</div></td>
+			<td><input type="text" class="text" id="email_2" name="email"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Mobile:</div></td>
+			<td><input type="text" class="text" id="mobile_2" name="mobile"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Phone:</div></td>
+			<td><input type="text" class="text" id="phone_2" name="phone"></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align:right"><input type="button" value="Send" onclick="registerUser2()"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><span id="reg-2-msg"></span></td>
+		</tr>
+	</table>
+	</form>
+</div>
+
+<div class="card">
+	<form id="form3">
+	<table width="100%">
+		<tr>
+			<td colspan="2"><div class="wg-subtitle">Register user (step 3 - password):</div></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp</td>
+		</tr>
+		<tr>
+			<td width="100"><div class="wg-label">Choose a password:</div></td>
+			<td><input type="password" class="text" id="password_3" name="password"></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align:right"><input type="button" value="Send" onclick="registerUser3()"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><span id="reg-3-msg"></span></td>
+		</tr>
+	</table>
+	</form>
+</div>
+
+<div class="card">
+	<form id="form4">
+	<table width="100%">
+		<tr>
+			<td colspan="2"><div class="wg-subtitle">Login:</div></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp</td>
+		</tr>
+		<tr>
+			<td width="100"><div class="wg-label">Email:</div></td>
+			<td><input type="text" class="text" id="email_4" name="email"></td>
+		</tr>
+		<tr>
+			<td><div class="wg-label">Password:</div></td>
+			<td><input type="password" class="text" id="password_4" name="password"></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align:right"><input type="button" value="Send" onclick="signIn()"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><span id="sign-in-msg"></span></td>
+		</tr>
+	</table>
+	</form>
+</div>
+
+<div class="card">
+	<table width="100%">
+		<tr>
+			<td colspan="2" style="text-align:right"><input type="button" value="Sign out" onclick="signOut()"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><span id="sign-out-msg"></span></td>
+		</tr>
+	</table>
+</div>
+
+<div style="height:100px">
+</div>
+
 </body>
 </html>
